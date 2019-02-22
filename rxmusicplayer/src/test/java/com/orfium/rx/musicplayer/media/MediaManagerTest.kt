@@ -1,6 +1,6 @@
 package com.orfium.rx.musicplayer.media
 
-import com.orfium.rx.musicplayer.RxPlayer
+import com.orfium.rx.musicplayer.RxMusicPlayer
 import com.orfium.rx.musicplayer.common.Action
 import com.orfium.rx.musicplayer.common.PlaybackState
 import com.orfium.rx.musicplayer.playback.Playback
@@ -127,7 +127,7 @@ class MediaManagerTest {
 
         `when`(queue.current).thenReturn(media)
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Start)
         verify(queue).setQueue(list, index)
@@ -142,7 +142,7 @@ class MediaManagerTest {
         val action = Action.add(media)
 
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Add)
         verify(queue).addQueue(media)
@@ -154,7 +154,7 @@ class MediaManagerTest {
         val action = Action.remove(media)
 
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Remove)
         verify(queue).removeQueue(media)
@@ -166,7 +166,7 @@ class MediaManagerTest {
         val action = Action.seek(position)
 
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Seek)
         verify(playerCallback).seekTo(position)
@@ -185,7 +185,7 @@ class MediaManagerTest {
         `when`(queue.previous).thenReturn(previous)
 
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Previous)
         verify(playerCallback).invalidateCurrent()
@@ -205,7 +205,7 @@ class MediaManagerTest {
         `when`(queue.current).thenReturn(current)
 
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Previous)
         verify(playerCallback).invalidateCurrent()
@@ -219,7 +219,7 @@ class MediaManagerTest {
         val action = Action.pause()
 
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Pause)
         verify(playerCallback).pause()
@@ -236,7 +236,7 @@ class MediaManagerTest {
         `when`(playerCallback.position).thenReturn(position)
 
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Resume)
         verify(playerCallback).play(media)
@@ -255,7 +255,7 @@ class MediaManagerTest {
         `when`(playerCallback.position).thenReturn(position)
 
         mediaManager.subscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Next)
         verify(playerCallback).play(media)
@@ -269,7 +269,7 @@ class MediaManagerTest {
         val action = Action.resume()
 
         mediaManager.unSubscribeQueue()
-        RxPlayer.action.onNext(action)
+        RxMusicPlayer.action.onNext(action)
 
         assertTrue(action is Action.Resume)
         verify(playerCallback, times(0)).play(media)

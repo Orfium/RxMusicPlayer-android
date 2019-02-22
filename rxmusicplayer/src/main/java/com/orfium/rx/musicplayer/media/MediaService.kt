@@ -8,7 +8,7 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.media.session.MediaButtonReceiver
-import com.orfium.rx.musicplayer.RxPlayer
+import com.orfium.rx.musicplayer.RxMusicPlayer
 import com.orfium.rx.musicplayer.common.Action
 import com.orfium.rx.musicplayer.common.PlaybackState
 import com.orfium.rx.musicplayer.factory.Factory
@@ -120,30 +120,30 @@ internal class MediaService: Service(), Playback.ServiceCallback {
 
     private fun executeTask(action: String) {
         when (action) {
-            ACTION_PLAY  -> RxPlayer.action.onNext(Action.resume())
-            ACTION_PREV  -> RxPlayer.action.onNext(Action.previous())
-            ACTION_NEXT  -> RxPlayer.action.onNext(Action.next())
-            ACTION_PAUSE -> RxPlayer.action.onNext(Action.pause())
-            ACTION_STOP  -> RxPlayer.action.onNext(Action.stop())
+            ACTION_PLAY  -> RxMusicPlayer.action.onNext(Action.resume())
+            ACTION_PREV  -> RxMusicPlayer.action.onNext(Action.previous())
+            ACTION_NEXT  -> RxMusicPlayer.action.onNext(Action.next())
+            ACTION_PAUSE -> RxMusicPlayer.action.onNext(Action.pause())
+            ACTION_STOP  -> RxMusicPlayer.action.onNext(Action.stop())
         }
     }
 
     private inner class MediaSessionCallback : MediaSessionCompat.Callback() {
 
         override fun onPlay() {
-            RxPlayer.action.onNext(Action.resume())
+            RxMusicPlayer.action.onNext(Action.resume())
         }
 
         override fun onSkipToNext() {
-            RxPlayer.action.onNext(Action.next())
+            RxMusicPlayer.action.onNext(Action.next())
         }
 
         override fun onSkipToPrevious() {
-            RxPlayer.action.onNext(Action.previous())
+            RxMusicPlayer.action.onNext(Action.previous())
         }
 
         override fun onPause() {
-            RxPlayer.action.onNext(Action.pause())
+            RxMusicPlayer.action.onNext(Action.pause())
         }
 
         override fun onSetRepeatMode(repeatMode: Int) {
@@ -155,11 +155,11 @@ internal class MediaService: Service(), Playback.ServiceCallback {
         }
 
         override fun onStop() {
-            RxPlayer.action.onNext(Action.stop())
+            RxMusicPlayer.action.onNext(Action.stop())
         }
 
         override fun onSeekTo(pos: Long) {
-            RxPlayer.action.onNext(Action.seek(pos))
+            RxMusicPlayer.action.onNext(Action.seek(pos))
         }
     }
 

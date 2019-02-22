@@ -9,7 +9,7 @@ import com.orfium.rx.musicplayer.media.MediaService
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-object RxPlayer {
+object RxMusicPlayer {
 
     private val playbackStateSubject = BehaviorSubject.create<PlaybackState>()
     private val queueSubject = BehaviorSubject.create<QueueData>()

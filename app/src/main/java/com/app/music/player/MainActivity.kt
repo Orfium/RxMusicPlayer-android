@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.orfium.rx.musicplayer.RxPlayer
+import com.orfium.rx.musicplayer.RxMusicPlayer
 import com.orfium.rx.musicplayer.common.PlaybackState
 import com.orfium.rx.musicplayer.media.Media
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,14 +19,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        RxPlayer.start(this)
+        RxMusicPlayer.start(this)
 
         val adapter = PopularAdapter(generateMedia())
         popularRecyclerView.layoutManager = LinearLayoutManager(this)
         popularRecyclerView.adapter = adapter
 
         compositeDisposable.add(
-            RxPlayer.state
+            RxMusicPlayer.state
                 .distinctUntilChanged()
                 .subscribe { state ->
                     when (state) {
@@ -47,14 +47,14 @@ class MainActivity : AppCompatActivity() {
         )
 
         compositeDisposable.add(
-            RxPlayer.position
+            RxMusicPlayer.position
                 .observeOn(AndroidSchedulers.mainThread())
                 .distinctUntilChanged()
                 .subscribe { position -> Log.d(this.javaClass.name, position.toString()) }
         )
 
         compositeDisposable.add(
-            RxPlayer.queue
+            RxMusicPlayer.queue
                 .subscribe { queue -> Log.d(this.javaClass.name, queue.toString()) }
         )
     }

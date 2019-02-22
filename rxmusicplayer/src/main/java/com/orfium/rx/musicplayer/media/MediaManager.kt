@@ -1,6 +1,6 @@
 package com.orfium.rx.musicplayer.media
 
-import com.orfium.rx.musicplayer.RxPlayer
+import com.orfium.rx.musicplayer.RxMusicPlayer
 import com.orfium.rx.musicplayer.common.PlaybackState
 import com.orfium.rx.musicplayer.common.Action
 import com.orfium.rx.musicplayer.common.QueueData
@@ -47,7 +47,7 @@ class MediaManager internal constructor(
     }
 
     fun subscribeQueue() {
-        val state = RxPlayer.action
+        val state = RxMusicPlayer.action
             .subscribe { action ->
                 when (action) {
                     is Action.Start -> handlePlayRequest(action.media, action.index)
@@ -64,7 +64,7 @@ class MediaManager internal constructor(
         val position = Observable.interval(500, TimeUnit.MILLISECONDS)
             .timeInterval()
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ RxPlayer.position.onNext(playerCallback.position) }, { /* Ignore exception */ })
+            .subscribe({ RxMusicPlayer.position.onNext(playerCallback.position) }, { /* Ignore exception */ })
         compositeDisposable.addAll(state, position)
     }
 
@@ -129,11 +129,11 @@ class MediaManager internal constructor(
 
     private fun updatePlaybackState(playbackState: PlaybackState, position: Long) {
         serviceCallback.onPlaybackStateChanged(playbackState, position)
-        RxPlayer.state.onNext(playbackState)
+        RxMusicPlayer.state.onNext(playbackState)
     }
 
     private fun onNextQueue() {
-        RxPlayer.queue.onNext(QueueData(queue.list, queue.currentIndex))
+        RxMusicPlayer.queue.onNext(QueueData(queue.list, queue.currentIndex))
     }
 
 }

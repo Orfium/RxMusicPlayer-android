@@ -17,7 +17,7 @@ sealed class PlaybackState {
 
         /**
          * When this method gets called, MediaService gets destroyed.
-         * [com.orfium.rx.musicplayer.RxPlayer.start] method needs to be called again
+         * [com.orfium.rx.musicplayer.RxMusicPlayer.start] method needs to be called again
          */
         fun stopped(): PlaybackState =
             Stopped
