@@ -88,13 +88,6 @@ And add the dependency in the build.gradle of the module:
 implementation 'com.github.Orfium:RxMusicPlayer-android:LATEST_VERSION'
 ```
 
-Be sure you have the following dependencies in your build.gradle
-```gradle
-implementation "io.reactivex.rxjava2:rxjava:rxJava2Version"
-implementation "io.reactivex.rxjava2:rxandroid:rxAndroidVersion"
-implementation "com.github.bumptech.glide:glide:glide4Version"
-```
-
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
