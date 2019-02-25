@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/Orfium/RxMusicPlayer-android.svg)](https://jitpack.io/#Orfium/RxMusicPlayer-android)
+[![](https://jitpack.io/v/Orfium/RxMusicPlayer-android.svg)](https://jitpack.io/#Orfium/RxMusicPlayer-android) [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-RxMusicPlayer-green.svg?style=flat )]( https://android-arsenal.com/details/1/7524 )
 
 # RxMusicPlayer
 
@@ -72,7 +72,7 @@ RxMusicPlayer.position
 ```
 
 ## Setup
-The latest libary version is [![](https://jitpack.io/v/Orfium/RxMusicPlayer-android.svg)](https://jitpack.io/#Orfium/RxMusicPlayer-android)
+The latest library version is [![](https://jitpack.io/v/Orfium/RxMusicPlayer-android.svg)](https://jitpack.io/#Orfium/RxMusicPlayer-android)
 
 Add the JitPack repository in your build.gradle (top level module):
 ```gradle
