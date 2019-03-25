@@ -187,7 +187,7 @@ internal class NotificationManager(
             .setPriority(Notification.PRIORITY_MAX)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setUsesChronometer(false)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.mipmap.ic_notification_small)
             .setShowWhen(false)
             .setOnlyAlertOnce(true)
             .setContentTitle(media?.title)
