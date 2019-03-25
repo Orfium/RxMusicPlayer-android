@@ -1,6 +1,7 @@
 package com.orfium.rx.musicplayer.media
 
 import android.app.Service
+import android.content.ComponentName
 import android.content.Intent
 import android.os.IBinder
 import android.os.SystemClock
@@ -36,7 +37,8 @@ internal class MediaService: Service(), Playback.ServiceCallback {
     override fun onCreate() {
         super.onCreate()
 
-        mediaSession = MediaSessionCompat(applicationContext, javaClass.name).apply {
+        val receiverComponentName = ComponentName(packageName, javaClass.name)
+        mediaSession = MediaSessionCompat(applicationContext, javaClass.name, receiverComponentName,  null).apply {
             setCallback(MediaSessionCallback())
             setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS or MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS)
         }
