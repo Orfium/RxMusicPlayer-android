@@ -22,6 +22,13 @@ object RxMusicPlayer {
     }
 
     @JvmStatic
+    fun start(context: Context, notificationIntent: Intent) {
+        val intent = Intent(context, MediaService::class.java)
+        intent.putExtra(MediaService.EXTRA_NOTIFICATION_INTENT, notificationIntent)
+        context.startService(intent)
+    }
+
+    @JvmStatic
     val state: BehaviorSubject<PlaybackState>
         get() = playbackStateSubject
 
