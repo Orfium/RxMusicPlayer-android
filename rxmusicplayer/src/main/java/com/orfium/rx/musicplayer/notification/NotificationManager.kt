@@ -27,7 +27,8 @@ import com.orfium.rx.musicplayer.media.MediaService
 internal class NotificationManager(
     private val service: Service,
     private val token: MediaSessionCompat.Token,
-    private val notificationManager: NotificationManagerCompat
+    private val notificationManager: NotificationManagerCompat,
+    private var notificationIntent: Intent? = null
 ) {
 
     companion object {
@@ -68,6 +69,10 @@ internal class NotificationManager(
             is PlaybackState.Completed -> pauseNotification()
             else -> stopNotification()
         }
+    }
+
+    fun setNotificationIntent(intent: Intent) {
+        this.notificationIntent = intent
     }
 
     private fun updateNotification() {
@@ -199,11 +204,10 @@ internal class NotificationManager(
         builder.addAction(next(service))
         builder.setLargeIcon(bitmap)
 
-        val notificationIntent = Intent()
         builder.setContentIntent(
             PendingIntent.getActivity(
                 service,
-                PLAYER_PENDING_INTENT_ID, notificationIntent, 0
+                PLAYER_PENDING_INTENT_ID, notificationIntent?: Intent(), 0
             )
         )
         notify(builder.build())

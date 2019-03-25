@@ -1,5 +1,6 @@
 package com.app.music.player
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        RxMusicPlayer.start(this)
+        RxMusicPlayer.start(this, Intent(this, MainActivity::class.java))
 
         val adapter = PopularAdapter(generateMedia())
         popularRecyclerView.layoutManager = LinearLayoutManager(this)
