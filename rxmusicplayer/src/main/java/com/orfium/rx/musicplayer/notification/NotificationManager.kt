@@ -28,7 +28,8 @@ internal class NotificationManager(
     private val service: Service,
     private val token: MediaSessionCompat.Token,
     private val notificationManager: NotificationManagerCompat,
-    private var notificationIntent: Intent? = null
+    private var notificationIntent: Intent? = null,
+    private var notificationIconRes: Int = R.mipmap.ic_notification_small
 ) {
 
     companion object {
@@ -73,6 +74,10 @@ internal class NotificationManager(
 
     fun setNotificationIntent(intent: Intent) {
         this.notificationIntent = intent
+    }
+
+    fun setNotificationIconRes(notificationIconRes: Int) {
+        this.notificationIconRes = notificationIconRes
     }
 
     private fun updateNotification() {
@@ -187,7 +192,7 @@ internal class NotificationManager(
             .setPriority(Notification.PRIORITY_MAX)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setUsesChronometer(false)
-            .setSmallIcon(R.mipmap.ic_notification_small)
+            .setSmallIcon(notificationIconRes)
             .setShowWhen(false)
             .setOnlyAlertOnce(true)
             .setContentTitle(media?.title)

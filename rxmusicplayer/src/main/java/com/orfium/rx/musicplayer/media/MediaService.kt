@@ -25,6 +25,7 @@ internal class MediaService: Service(), Playback.ServiceCallback {
         const val ACTION_NEXT  = "com.orfium.rx.musicplayer.next"
         const val ACTION_STOP  = "com.orfium.rx.musicplayer.stop"
         const val EXTRA_NOTIFICATION_INTENT = "com.orfium.rx.musicplayer.media.NOTIFICATION_INTENT"
+        const val EXTRA_NOTIFICATION_ICON_RES = "com.orfium.rx.musicplayer.media.NOTIFICATION_ICON_RES"
     }
 
     private lateinit var mediaSession: MediaSessionCompat
@@ -58,6 +59,9 @@ internal class MediaService: Service(), Playback.ServiceCallback {
             MediaButtonReceiver.handleIntent(mediaSession, startIntent)
             if (startIntent.hasExtra(EXTRA_NOTIFICATION_INTENT)) {
                 notificationManager.setNotificationIntent(startIntent.getParcelableExtra(EXTRA_NOTIFICATION_INTENT))
+            }
+            if (startIntent.hasExtra(EXTRA_NOTIFICATION_ICON_RES)) {
+                notificationManager.setNotificationIconRes(startIntent.getIntExtra(EXTRA_NOTIFICATION_ICON_RES, 0))
             }
         }
         return START_NOT_STICKY

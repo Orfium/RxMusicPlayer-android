@@ -22,9 +22,10 @@ object RxMusicPlayer {
     }
 
     @JvmStatic
-    fun start(context: Context, notificationIntent: Intent) {
+    fun start(context: Context, notificationIntent: Intent, notificationIconRes: Int) {
         val intent = Intent(context, MediaService::class.java)
         intent.putExtra(MediaService.EXTRA_NOTIFICATION_INTENT, notificationIntent)
+        intent.putExtra(MediaService.EXTRA_NOTIFICATION_ICON_RES, notificationIconRes)
         context.startService(intent)
     }
 

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        RxMusicPlayer.start(this, Intent(this, MainActivity::class.java))
+        RxMusicPlayer.start(this, Intent(this, MainActivity::class.java), R.mipmap.ic_notification_small)
 
         val adapter = PopularAdapter(generateMedia())
         popularRecyclerView.layoutManager = LinearLayoutManager(this)
