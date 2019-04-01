@@ -104,6 +104,7 @@ class MediaManagerTest {
         mediaManager.onCompletion()
 
         verify(serviceCallback).onPlaybackStateChanged(state, position)
+        verify(playerCallback).complete()
     }
 
     @Test

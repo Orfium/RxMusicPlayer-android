@@ -59,6 +59,12 @@ internal abstract class BasePlayback(
         unregisterNoiseReceiver()
     }
 
+    override fun complete() {
+        invalidateCurrent()
+        unregisterWifiLock()
+        unregisterNoiseReceiver()
+    }
+
     override fun stop() {
         releaseFocus()
         stopPlayer()

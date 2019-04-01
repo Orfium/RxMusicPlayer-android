@@ -18,6 +18,8 @@ internal interface Playback {
 
         fun pause()
 
+        fun complete()
+
         fun stop()
 
         fun seekTo(position: Long)
