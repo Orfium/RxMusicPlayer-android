@@ -35,6 +35,7 @@ class MediaManager internal constructor(
             play(queue.next)
         } else {
             updatePlaybackState(PlaybackState.completed(queue.current), playerCallback.position)
+            playerCallback.complete()
         }
     }
 

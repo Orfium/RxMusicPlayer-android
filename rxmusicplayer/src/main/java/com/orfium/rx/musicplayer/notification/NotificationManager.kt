@@ -199,7 +199,7 @@ internal class NotificationManager(
             .setContentText(media?.artist)
             .addAction(prev(service))
 
-        if (state is PlaybackState.Paused) {
+        if (state is PlaybackState.Paused || state is PlaybackState.Completed) {
             builder.addAction(play(service))
             builder.setOngoing(false)
         } else {

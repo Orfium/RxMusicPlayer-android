@@ -9,7 +9,7 @@ buildscript {
 
         // App version
         versionCode = 1
-        versionName = '1.0.1'
+        versionName = '1.0.3'
 
         // Kotlin
         kotlinVersion = '1.3.21'

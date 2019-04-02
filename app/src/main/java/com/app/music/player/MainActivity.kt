@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
                             Log.d("PlaybackState Paused", state.media?.toString())
                             adapter.notifyDataSetChanged()
                         }
+                        is PlaybackState.Completed -> {
+                            Log.d("PlaybackState Completed", state.media?.toString())
+                            adapter.notifyDataSetChanged()
+                        }
                     }
                 }
         )
