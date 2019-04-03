@@ -100,7 +100,7 @@ internal class NotificationManager(
         hasStarted = false
         media = null
         notificationManager.cancel(NOTIFICATION_ID)
-        service.stopForeground(true)
+        service.stopSelf()
     }
 
     private fun pause(context: Context): NotificationCompat.Action {
