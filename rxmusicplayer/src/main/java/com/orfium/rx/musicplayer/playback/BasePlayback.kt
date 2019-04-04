@@ -116,7 +116,11 @@ internal abstract class BasePlayback(
     }
 
     private fun unregisterNoiseReceiver() {
-        context.unregisterReceiver(audioNoisyReceiver)
+        try {
+            context.unregisterReceiver(audioNoisyReceiver)
+        } catch (e: IllegalArgumentException) {
+
+        }
     }
 
 }
