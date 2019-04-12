@@ -121,6 +121,7 @@ internal class MediaService: Service(), Playback.ServiceCallback {
         return MediaMetadataCompat.Builder()
             .putString(MediaMetadataCompat.METADATA_KEY_ART_URI, media?.image)
             .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE, media?.title)
+            .putString(MediaMetadataCompat.METADATA_KEY_TITLE, media?.title)
             .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, media?.artist)
             .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, media?.streamUrl)
             .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, media?.id?.toString())
