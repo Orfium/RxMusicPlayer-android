@@ -42,6 +42,7 @@ internal class NotificationManager(
     }
 
     private lateinit var notificationChannels: NotificationChannels
+    private var intent: Intent? = null
 
     @Volatile
     private var hasStarted: Boolean = false
@@ -53,6 +54,10 @@ internal class NotificationManager(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannels = NotificationChannels(service)
         }
+    }
+
+    fun setIntent(intent: Intent?) {
+        this.intent = intent
     }
 
     fun updateMedia(media: Media?) {
@@ -99,7 +104,7 @@ internal class NotificationManager(
             PAUSE_PENDING_INTENT_ID,
             MediaService.ACTION_PAUSE
         )
-        return NotificationCompat.Action(android.R.drawable.ic_media_pause, "Pause", pendingIntent)
+        return NotificationCompat.Action(R.drawable.ic_music_player_pause, "Pause", pendingIntent)
     }
 
     private fun next(context: Context): NotificationCompat.Action {
@@ -108,7 +113,7 @@ internal class NotificationManager(
             PLAY_NEXT_PENDING_INTENT_ID,
             MediaService.ACTION_NEXT
         )
-        return NotificationCompat.Action(android.R.drawable.ic_media_next, "Next", pendingIntent)
+        return NotificationCompat.Action(R.drawable.ic_music_player_next, "Next", pendingIntent)
     }
 
     private fun prev(context: Context): NotificationCompat.Action {
@@ -117,7 +122,7 @@ internal class NotificationManager(
             PLAY_PREV_PENDING_INTENT_ID,
             MediaService.ACTION_PREV
         )
-        return NotificationCompat.Action(android.R.drawable.ic_media_previous, "Previous", pendingIntent)
+        return NotificationCompat.Action(R.drawable.ic_music_player_prev, "Previous", pendingIntent)
     }
 
     private fun play(context: Context): NotificationCompat.Action {
@@ -126,7 +131,7 @@ internal class NotificationManager(
             PLAY_PENDING_INTENT_ID,
             MediaService.ACTION_PLAY
         )
-        return NotificationCompat.Action(android.R.drawable.ic_media_play, "Start", pendingIntent)
+        return NotificationCompat.Action(R.drawable.ic_music_player_play, "Start", pendingIntent)
     }
 
     private fun dismiss(context: Context): PendingIntent {
@@ -182,11 +187,12 @@ internal class NotificationManager(
             .setPriority(Notification.PRIORITY_MAX)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setUsesChronometer(false)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.ic_music_player_small_icon)
             .setShowWhen(false)
             .setOnlyAlertOnce(true)
             .setContentTitle(media?.title)
             .setContentText(media?.artist)
+            .setDeleteIntent(dismiss(service))
             .addAction(prev(service))
 
         if (state is PlaybackState.Paused || state is PlaybackState.Completed) {
@@ -199,7 +205,7 @@ internal class NotificationManager(
         builder.addAction(next(service))
         builder.setLargeIcon(bitmap)
 
-        val notificationIntent = Intent()
+        val notificationIntent = intent ?: Intent()
         builder.setContentIntent(
             PendingIntent.getActivity(
                 service,

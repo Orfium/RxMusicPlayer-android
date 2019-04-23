@@ -46,6 +46,9 @@ class MainActivity : AppCompatActivity() {
                             Log.d("PlaybackState Completed", state.media?.toString())
                             adapter.notifyDataSetChanged()
                         }
+                        is PlaybackState.Stopped -> {
+                            // At this state MediaService gets destroyed, so RxMusicPlayer.start needs to be called again
+                        }
                     }
                 }
         )

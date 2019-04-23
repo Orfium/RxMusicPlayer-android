@@ -17,6 +17,7 @@ internal abstract class BasePlayback(
     @Volatile
     protected var currentMedia: Media? = null
 
+    private var receiverRegistered = false
     private val audioBecomingNoisyIntent = IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
 
     private val audioNoisyReceiver = object : BroadcastReceiver() {
@@ -112,11 +113,17 @@ internal abstract class BasePlayback(
     }
 
     private fun registerNoiseReceiver() {
-        context.registerReceiver(audioNoisyReceiver, audioBecomingNoisyIntent)
+        if(!receiverRegistered) {
+            context.registerReceiver(audioNoisyReceiver, audioBecomingNoisyIntent)
+            receiverRegistered = true
+        }
     }
 
     private fun unregisterNoiseReceiver() {
-        context.unregisterReceiver(audioNoisyReceiver)
+        if(receiverRegistered) {
+            context.unregisterReceiver(audioNoisyReceiver)
+            receiverRegistered = false
+        }
     }
 
 }
