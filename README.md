@@ -15,6 +15,12 @@ Before start using RxMusicPlayer you have to call the method that starts the Med
 ```kotlin
 RxMusicPlayer.start(context)
 ```
+or
+```kotlin
+RxMusicPlayer.start(context, Intent(this, MainActivity::class.java))
+```
+if you want to specify the activity you want to launch from notification
+
 ## Usage
 
 Create a [Media](https://github.com/Orfium/RxMusicPlayer-android/blob/master/rxmusicplayer/src/main/java/com/orfium/rx/musicplayer/media/Media.kt) item class that contains all the necessary data information and call playStop extension function on it.
@@ -60,6 +66,8 @@ RxMusicPlayer.state
                 }
             }
 ```
+A notification is provided by default when the state gets changes. You can configure notification's icons by overriding [them](https://github.com/Orfium/RxMusicPlayer-android/tree/master/rxmusicplayer/src/main/res/drawable). 
+
 RxMusicPlayer allows you to observe changes in media queue list and the current playback position of exoplayer
 ```kotlin
 RxMusicPlayer.queue
